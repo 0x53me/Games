@@ -1,32 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
-        <meta charset="utf-8">
-        <title>HTMLの構成</title>
-        <style>
-            button.gazo img{
-                content:url("images/cookie.png");
-                display:inline-block;
-                height: 100%;
-            }
-        </style>
+        <meta charset="UTF-8">
+        <title>0x53me Games</title>
+        <meta name="description" content="ディスクリプションを入力">
+        <meta name="viewport" content="width=devicewidth,initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="main.js"></script>
     </head>
     <body>
-        <h1></h1>
-        <p></p>
-        <button id="clickbutton" type="button" class="gazo">
-            <img alt="Button Image">
-        </button>
-        <p id="times">0</p>
-        <script>
-            let click = 0;
-            const BUTTON_CLICK_EVENT = document.getElementById('clickbutton')
-            const timesDisplay = document.getElementById('times');
+        <!--<header>ヘッダー</header>
+        <nav>ナビ</nav>-->
 
-            BUTTON_CLICK_EVENT.addEventListener('click', () => {
-                click += 1;
-                timesDisplay.textContent = click;
-            });
-        </script>
+        <article>
+            <h1>Game</h1>
+            <section>
+                <h2>せんとくんクリッカー</h2>
+                <!--<p>コンテンツの内容</p>-->
+                <a href="SentokunClicker.html">せんとくんクリッカー</a>
+            </section>
+        </article>
+
+        <!--<footer>フッター</footer>-->
     </body>
 </html>

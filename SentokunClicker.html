@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>せんとくんクリッカー</title>
+        <meta name="viewport" content="width=devicewidth,initial-scale=1.0">
+        <style>
+            button.gazo img{
+                content:url("images/Sentokun.png");
+                display:inline-block;
+                height: 100%;
+            }
+        </style>
+        <style>
+            .colum{
+                height: 100vh;
+                width: 100%;
+            }
+            .cat1{
+                background-color: rgb(255, 249, 240);
+                align-items: center;
+            }
+            .cat2{
+                background-color: antiquewhite;
+            }
+            .wrapper{
+                    display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="colum cat1">
+                <h1 style="text-align: center;">せんとくんクリッカー</h1>
+                <p style="text-align: center;">せんとくんをクリックするだけ</p>   
+                　　　<button id="clickbutton" type="button" class="gazo">
+                <img alt="Button Image">
+                </button>
+            </div>
+            <div class="colum cat2">
+                <br><br>
+                <p id="times" style="text-align: center;">0</p>
+            </div>
+        </div>
+
+
+        <script>
+            let click = 0;
+            const BUTTON_CLICK_EVENT = document.getElementById('clickbutton')
+            const timesDisplay = document.getElementById('times') ;
+            timesDisplay.textContent = "0 せんとくん" 
+            BUTTON_CLICK_EVENT.addEventListener('click', () => {
+                click += 1;
+                timesDisplay.textContent = click + " せんとくん";
+            });
+        </script>
+    </body>
+</html>
