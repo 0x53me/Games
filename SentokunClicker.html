@@ -76,6 +76,7 @@
             timesDisplay.textContent = "0 せんとくん" 
             BUTTON_CLICK_EVENT.addEventListener('click', () => {
                 click += 1;
+                localStorage.setItem("sentokunClick", click); // 保存
                 timesDisplay.textContent = click + " せんとくん";
                 progressbarDisplay.textContent = "" ;
 
@@ -108,6 +109,17 @@
                     default:
                 }
             });
+
+            // 保存
+            localStorage.setItem("sentokunClick", click);
+
+            // 読み込み
+            const savedClick = localStorage.getItem("sentokunClick");
+            if (savedClick !== null) {
+                click = parseInt(savedClick);
+                timesDisplay.textContent = click + " せんとくん";
+                progressbarDisplay.style.width = Math.min(click / 10000 * 100, 100) + "%";
+            }
         </script>
     </body>
 </html>
