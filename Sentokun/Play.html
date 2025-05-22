@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>せんとくんクリッカー</title>
-        <meta name="viewport" content="width=devicewidth,initial-scale=1.0">
+        <meta name="viewport" content="width-devicewidth,initial-scale=1.0">
         <style>
             button.gazo img{
                 content:url("images/Sentokun.png");
@@ -64,6 +64,8 @@
                     <h2 id="progressbar" style="background-color: lightgreen; width: 0; height: 20px; transition: width 0.3s;"></h2>
                 </div>
                 <p style="margin-left: 5%;">※データはブラウザに保存されます。</p>
+                <a href="/badge.html" style="margin-left: 5%;">獲得した進捗を見る</a>
+                <button id="clearbutton" type="button" style="margin-left: 5%;">データクリア</button>
             </div>
         </div>
 
@@ -72,6 +74,7 @@
 
             let click = 0;
             const BUTTON_CLICK_EVENT = document.getElementById('clickbutton')
+            const CLEAR_BUTTON_CLICK_EVENT = document.getElementById('clearbutton')
             const timesDisplay = document.getElementById('times') ;
             const progressDisplay = document.getElementById('progress') ;
             const progressbarDisplay = document.getElementById('progressbar');
@@ -104,18 +107,23 @@
                 switch(click){
                     case 1:
                         progressDisplay.textContent = "[達成] 初めてのせんとくん";
+                        localStorage.setItem("badge_1", "true");
                         break;
                     case 10:
                         progressDisplay.textContent = "[達成] 初級せんとくん";
+                        localStorage.setItem("badge_10", "true");
                         break;
                     case 100:
                         progressDisplay.textContent = "[達成] 中級せんとくん";
+                        localStorage.setItem("badge_100", "true");
                         break;
                     case 1000:
                         progressDisplay.textContent = "[達成] 上級せんとくん";
+                        localStorage.setItem("badge_1000", "true");
                         break;
                     case 10000:
                         progressDisplay.textContent = "[達成] 10000せんとくん";
+                        localStorage.setItem("badge_10000", "true");
                         break;
                     case 10001:
                         alert("\n10000せんとくんおめでとう！\n\n0せんとくんに戻ります。");
@@ -127,6 +135,15 @@
                     default:
                 }
                 localStorage.setItem("sentokunProgress", progressDisplay.textContent);
+            });
+
+            CLEAR_BUTTON_CLICK_EVENT.addEventListener('click', () => {
+                const result = confirm("本当にデータを消去しますか？")
+                if(result){
+                    localStorage.clear();
+                    location.reload();
+                    alert("データを消去しました。")
+                }
             });
         </script>
     </body>
