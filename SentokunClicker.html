@@ -9,6 +9,14 @@
                 content:url("images/Sentokun.png");
                 display:inline-block;
                 height: 100%;
+                transition: 0.3s;
+            }
+            button.gazo img:hover {
+                transform: scale(1.02);
+            }
+            button{
+                border-style: none;
+                background-color: rgb(255, 249, 240);
             }
         </style>
         <style>
@@ -26,6 +34,12 @@
             .wrapper{
                     display: flex;
             }
+            .progress{
+                background-color: aliceblue;
+                padding: 0%;
+                margin-left: 5%;
+                margin-right: 5%;
+            }
         </style>
     </head>
     <body>
@@ -35,26 +49,69 @@
                 <p style="text-align: center;">せんとくんをクリックするだけ</p> <br>
                 <div class="mnnk" style="text-align: center;">
                     <button id="clickbutton" type="button" class="gazo">
-                    <img alt="Button Image">
+                    <img alt="Button Image"> 
+                    </button>
                 </div> 
-                </button>
             </div>
             <div class="colum cat2">
                 <br><br>
-                <p id="times" style="text-align: center;">0</p>
+                <h2 id="times" style="text-align: center;"></h2>
+                <br><br>
+                <div class="progress">
+                    <br>
+                    <h3 style="text-align: center;">進捗</h3>
+                    <p id="progress" style="text-align: center;">？？？</p><br>
+                    <h2 id="progressbar" style="background-color: lightgreen; width: 0; height: 20px; transition: width 0.3s;"></h2>
+                </div>
             </div>
         </div>
 
 
         <script>
-            let click = 0;
+            let click = 0; var i=0;
             const BUTTON_CLICK_EVENT = document.getElementById('clickbutton')
             const timesDisplay = document.getElementById('times') ;
+            const progressDisplay = document.getElementById('progress') ;
+            const progressbarDisplay = document.getElementById('progressbar');
             timesDisplay.textContent = "0 せんとくん" 
             BUTTON_CLICK_EVENT.addEventListener('click', () => {
                 click += 1;
                 timesDisplay.textContent = click + " せんとくん";
+                progressbarDisplay.textContent = "" ;
+
+                const progressbar = document.getElementById('progressbar');
+                progressbar.style.width = Math.min(click/10000 *100, 100) + "%";  // 最大100
+
+                switch(click){
+                    case 1:
+                        progressDisplay.textContent = "[達成] 初めてのせんとくん";
+                        break;
+                    case 10:
+                        progressDisplay.textContent = "[達成] 初級せんとくん";
+                        break;
+                    case 100:
+                        progressDisplay.textContent = "[達成] 中級せんとくん";
+                        break;
+                    case 1000:
+                        progressDisplay.textContent = "[達成] 上級せんとくん";
+                        break;
+                    case 10000:
+                        progressDisplay.textContent = "[達成] 10000せんとくん";
+                        break;
+                    case 10001:
+                        alert("\n10000せんとくんおめでとう！\n\n0せんとくんに戻ります。");
+                        click = 0;
+                        timesDisplay.textContent = "0 せんとくん";
+                        progressDisplay.textContent = "？？？";
+                        progressbarDisplay.style.width = "0%";
+                        break;
+                    default:
+                }
             });
         </script>
     </body>
 </html>
+<!--
+    v1.0 2025年5月21日 
+    v1.1 2025年5月22日 Progressの追加
+-->
