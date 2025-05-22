@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>せんとくんクリッカー</title>
+        <meta name="viewport" content="width=devicewidth,initial-scale=1.0">
+        <style>
+            button.gazo img{
+                content:url("images/Sentokun.png");
+                display:inline-block;
+                height: 100%;
+                transition: 0.3s;
+            }
+            button.gazo img:hover {
+                transform: scale(1.02);
+            }
+            button{
+                border-style: none;
+                background-color: rgb(255, 249, 240);
+            }
+        </style>
+        <style>
+            .colum{
+                height: 100vh;
+                width: 100%;
+            }
+            .cat1{
+                background-color: rgb(255, 249, 240);
+                align-items: center;
+            }
+            .cat2{
+                background-color: antiquewhite;
+            }
+            .wrapper{
+                    display: flex;
+            }
+            .progress{
+                background-color: aliceblue;
+                padding: 0%;
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="colum cat1"><br>
+                <h1 style="text-align: center;">せんとくんクリッカー</h1>
+                <p style="text-align: center;">せんとくんをクリックするだけ</p> <br>
+                <div class="mnnk" style="text-align: center;">
+                    <button id="clickbutton" type="button" class="gazo">
+                    <img alt="Button Image"> 
+                    </button>
+                </div> 
+            </div>
+            <div class="colum cat2">
+                <br><br>
+                <h2 id="times" style="text-align: center;"></h2>
+                <br><br>
+                <div class="progress">
+                    <br>
+                    <h3 style="text-align: center;">進捗</h3>
+                    <p id="progress" style="text-align: center;">？？？</p><br>
+                    <h2 id="progressbar" style="background-color: lightgreen; width: 0; height: 20px; transition: width 0.3s;"></h2>
+                </div>
+                <p style="margin-left: 5%;">※データはブラウザに保存されます。</p>
+            </div>
+        </div>
+
+
+        <script>
+
+            let click = 0;
+            const BUTTON_CLICK_EVENT = document.getElementById('clickbutton')
+            const timesDisplay = document.getElementById('times') ;
+            const progressDisplay = document.getElementById('progress') ;
+            const progressbarDisplay = document.getElementById('progressbar');
+
+            // 読み込み（ページロード時に先にやる）
+            const savedClick = localStorage.getItem("sentokunClick");
+            const savedProgress = localStorage.getItem("sentokunProgress");
+            if (savedClick !== null) {
+                click = parseInt(savedClick);
+                timesDisplay.textContent = click + " せんとくん";
+                progressbarDisplay.style.width = Math.min(click / 10000 * 100, 100) + "%";
+                if(savedProgress){
+                    progressDisplay.textContent = savedProgress;
+                }
+            } else {
+                timesDisplay.textContent = "0 せんとくん";
+                progressbarDisplay.style.width = "0%";
+                progressDisplay.textContent = "？？？";
+            }
+
+            BUTTON_CLICK_EVENT.addEventListener('click', () => {
+                click += 1;
+                localStorage.setItem("sentokunClick", click); // 保存
+                timesDisplay.textContent = click + " せんとくん";
+                progressbarDisplay.textContent = "" ;
+
+                const progressbar = document.getElementById('progressbar');
+                progressbar.style.width = Math.min(click/10000 *100, 100) + "%";  // 最大100
+
+                switch(click){
+                    case 1:
+                        progressDisplay.textContent = "[達成] 初めてのせんとくん";
+                        break;
+                    case 10:
+                        progressDisplay.textContent = "[達成] 初級せんとくん";
+                        break;
+                    case 100:
+                        progressDisplay.textContent = "[達成] 中級せんとくん";
+                        break;
+                    case 1000:
+                        progressDisplay.textContent = "[達成] 上級せんとくん";
+                        break;
+                    case 10000:
+                        progressDisplay.textContent = "[達成] 10000せんとくん";
+                        break;
+                    case 10001:
+                        alert("\n10000せんとくんおめでとう！\n\n0せんとくんに戻ります。");
+                        click = 0;
+                        timesDisplay.textContent = "0 せんとくん";
+                        progressDisplay.textContent = "？？？";
+                        progressbarDisplay.style.width = "0%";
+                        break;
+                    default:
+                }
+                localStorage.setItem("sentokunProgress", progressDisplay.textContent);
+            });
+        </script>
+    </body>
+</html>
+<!--
+    v1.0 2025年5月21日 
+    v1.1 2025年5月22日 Progressの追加
+-->
